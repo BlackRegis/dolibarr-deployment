@@ -18,13 +18,13 @@ spec:
         image: mysql:5.7
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "rootpassword"  # Changez ceci par un mot de passe sécurisé
+          value: "rootpassword"  
         - name: MYSQL_DATABASE
           value: "dolibarr"
         - name: MYSQL_USER
           value: "dolibarruser"
         - name: MYSQL_PASSWORD
-          value: "dolibarrpassword"  # Changez ceci par un mot de passe sécurisé
+          value: "dolibarrpassword"  
         ports:
         - containerPort: 3306
         volumeMounts:
