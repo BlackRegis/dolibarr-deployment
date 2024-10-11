@@ -18,21 +18,30 @@ spec:
         image: dolibarr/dolibarr:latest
         env:
         - name: DB_HOST
-          value: "mysql"  # Nom du service MySQL
+          value: "mysql"
         - name: DB_NAME
           value: "dolibarr"
         - name: DB_USER
           value: "dolibarruser"
         - name: DB_PASSWORD
-          value: "dolibarrpassword"  # Doit correspondre au mot de passe de MySQL
+          value: "dolibarrpassword"
         ports:
         - containerPort: 80
-      readinessProbe:
-        httpGet:
-          path: /
-          port: 80
-        initialDelaySeconds: 30
-        periodSeconds: 10
+
+        # Ajout des probes de santé
+        livenessProbe:
+          httpGet:
+            path: /  # Chemin à vérifier pour l'état de santé
+            port: 80
+          initialDelaySeconds: 60  # Attendre 60 secondes avant de vérifier
+          periodSeconds: 30  # Vérifier toutes les 30 secondes
+
+        readinessProbe:
+          httpGet:
+            path: /  # Chemin à vérifier pour vérifier si le service est prêt
+            port: 80
+          initialDelaySeconds: 30  # Attendre 30 secondes avant de vérifier
+          periodSeconds: 10  # Vérifier toutes les 10 secondes
 
 ---
 apiVersion: v1
