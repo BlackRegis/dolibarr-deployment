@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dolibarr
+  namespace: dolibarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dolibarr
+  template:
+    metadata:
+      labels:
+        app: dolibarr
+    spec:
+      containers:
+      - name: dolibarr
+        image: dolibarr/dolibarr:latest
+        env:
+        - name: DB_HOST
+          value: "mysql"  # Nom du service MySQL
+        - name: DB_NAME
+          value: "dolibarr"
+        - name: DB_USER
+          value: "dolibarruser"
+        - name: DB_PASSWORD
+          value: "dolibarrpassword"  # Doit correspondre au mot de passe de MySQL
+        ports:
+        - containerPort: 80
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 30
+        periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dolibarr
+  namespace: dolibarr
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: dolibarr
