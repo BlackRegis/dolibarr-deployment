@@ -60,4 +60,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi  # Ajustez la taille selon vos besoins
+      storage: 1Gi
+
