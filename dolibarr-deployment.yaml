@@ -29,10 +29,10 @@ spec:
           value: "admin"
         - name: DOLI_ADMIN_PASSWORD
           value: "adminpassword"
-        - name: DOLI_DB_TYPE
-          value: "mysql"
-        - name: DOLI_DB_HOST_PORT
-          value: 3306
+        # - name: DOLI_DB_TYPE
+        #   value: "mysql"
+        # - name: DOLI_DB_HOST_PORT
+        #   value: 3306
         
         ports:
         - containerPort: 80
@@ -55,14 +55,14 @@ spec:
             path: /
             port: 80
           initialDelaySeconds: 60
-          periodSeconds: 40
+          periodSeconds: 30
 
         readinessProbe:
           httpGet:
             path: /
             port: 80
           initialDelaySeconds: 30
-          periodSeconds: 20
+          periodSeconds: 10
 
 ---
 apiVersion: v1
