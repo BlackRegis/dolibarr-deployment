@@ -27,10 +27,10 @@ spec:
           value: "dolibarrpassword"
         # - name: DOLI_URL_ROOT
         #   value: "http://0.0.0.0"
-        # - name: DOLI_ADMIN_LOGIN
-        #   value: "admin"
-        # - name: DOLI_ADMIN_PASSWORD
-        #   value: "adminpassword"
+        - name: DOLI_ADMIN_LOGIN
+          value: "admin"
+        - name: DOLI_ADMIN_PASSWORD
+          value: "adminpassword"
         # - name: DOLI_INIT_DEMO
         #   value: 0
         ports:
