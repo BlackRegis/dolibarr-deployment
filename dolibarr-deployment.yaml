@@ -44,10 +44,10 @@ spec:
       volumes:
       - name: dolibarr-documents
         persistentVolumeClaim:
-          claimName: dolibarr-pvc
+          claimName: dolibarr-documents-pvc
       - name: dolibarr-custom
         persistentVolumeClaim:
-          claimName: dolibarr-pvc
+          claimName: dolibarr-custom-pvc
           
         livenessProbe:
           httpGet:
@@ -77,11 +77,25 @@ spec:
     nodePort: 30050
   selector:
     app: dolibarr
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: dolibarr-pvc
+  name: dolibarr-documents-pvc
+  namespace: dolibarr
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dolibarr-custom-pvc
   namespace: dolibarr
 spec:
   accessModes:
